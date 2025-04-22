@@ -1,0 +1,49 @@
+@use "../variables";
+
+.sort {
+  font-weight: 700;
+  position: relative;
+  padding-left: 10px;
+
+  @media (max-width: 800px) {
+    padding-top: 1.5rem;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    span {
+      font-weight: 400;
+      color: variables.$orange;
+      border-bottom: 2px dotted variables.$orange;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    padding: 13px 0;
+    background-color: #fff;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+
+    li {
+      padding: 10px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(variables.$orange, 0.15);
+      }
+    }
+
+    .active {
+      background-color: rgba(variables.$orange, 0.15);
+      color: variables.$orange;
+    }
+  }
+}
