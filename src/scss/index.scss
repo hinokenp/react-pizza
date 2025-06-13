@@ -64,4 +64,21 @@ body {
       flex-direction: column;
     }
   }
+
+  &__error-info {
+    max-width: 580px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    h2 {
+      font-size: 1.75rem;
+      padding-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.125rem;
+    }
+  }
 }

@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cart/cartSlice";
 import Plus from "../icons/Plus";
 
-function PizzaBlock({ title, imageUrl, types, sizes, price }) {
+function PizzaBlock({ id, title, imageUrl, types, sizes, price }) {
+  const dispatch = useDispatch();
+
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(0);
   const typeName = ["тонкое", "традиционное"];
-
-  console.log();
 
   return (
     <div className="pizza-block">
@@ -38,12 +40,23 @@ function PizzaBlock({ title, imageUrl, types, sizes, price }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <button className="button button_outline button_add">
+        <button
+          onClick={() =>
+            dispatch(
+              addProduct({
+                id,
+                title,
+                imageUrl,
+                type: typeName[activeType],
+                size: sizes[activeSize],
+                price,
+              })
+            )
+          }
+          className="button button_outline button_add"
+        >
           <Plus />
-          <div>
-            Добавить
-            <span>2</span>
-          </div>
+          <div>Добавить</div>
         </button>
       </div>
     </div>

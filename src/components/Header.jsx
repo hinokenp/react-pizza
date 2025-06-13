@@ -1,10 +1,14 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
+import { useSelector } from "react-redux";
 
 import PizzaLogo from "/logo.svg";
 import CartIcon from "./icons/CartIcon";
 import Search from "./Search";
 
-function Header({ searchValue, setSearchValue }) {
+function Header() {
+  const { pathname } = useLocation();
+  const { totalCount, totalPrice } = useSelector((state) => state.cart);
+
   return (
     <header className="header">
       <div className="container">
@@ -17,13 +21,13 @@ function Header({ searchValue, setSearchValue }) {
             </div>
           </div>
         </Link>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        {pathname !== "/cart" ? <Search /> : ""}
         <div className="header__cart">
           <Link to="/cart" className="button">
-            <span>520 ₽</span>
+            <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
             <CartIcon />
-            <span>3</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>

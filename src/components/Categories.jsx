@@ -1,4 +1,10 @@
-function Categories({ value, onChangeCategories }) {
+import { useSelector, useDispatch } from "react-redux";
+import { changeCategoriesId } from "../redux/categoies/categoriesSlice";
+
+function Categories() {
+  const categoriesId = useSelector((state) => state.categories.value);
+  const dispatch = useDispatch();
+
   const categories = [
     "Все",
     "Мясные",
@@ -15,8 +21,8 @@ function Categories({ value, onChangeCategories }) {
           return (
             <li
               key={index}
-              onClick={() => onChangeCategories(index)}
-              className={value === index ? "active" : ""}
+              onClick={() => dispatch(changeCategoriesId(index))}
+              className={categoriesId === index ? "active" : ""}
             >
               {name}
             </li>

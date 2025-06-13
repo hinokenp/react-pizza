@@ -1,24 +1,48 @@
 import styles from "./CartItem.module.scss";
-import Plus from "../icons/Plus";
+import { useDispatch } from "react-redux";
+import {
+  addProduct,
+  removeProduct,
+  minusItem,
+} from "../../redux/cart/cartSlice";
 
-function CartItem() {
+function CartItem({ id, title, type, size, price, count, imageUrl }) {
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.main}>
       <div className={styles.mainInfo}>
-        <img width={80} src="/img/pizzas/1.avif" alt="" />
+        <img width={80} src={imageUrl} alt="" />
         <div>
-          <p className={styles.title}>Сырный цыпленок</p>
-          <p className={styles.description}>тонкое тесто, 26 см.</p>
+          <p className={styles.title}>{title}</p>
+          <p className={styles.description}>
+            {type} тесто, {size} см.
+          </p>
         </div>
       </div>
       <div className={styles.buttons}>
         <div className={styles.amount}>
-          <button className={styles.button}>-</button>
-          <span>2</span>
-          <button className={styles.button}>+</button>
+          <button
+            onClick={() => dispatch(minusItem({ id, type, size }))}
+            className={styles.button}
+          >
+            -
+          </button>
+          <span>{count}</span>
+          <button
+            onClick={() => dispatch(addProduct({ id, type, size }))}
+            className={styles.button}
+          >
+            +
+          </button>
         </div>
-        <div className={styles.price}>770 ₽</div>
-        <button className={styles.delete}>x</button>
+        <div className={styles.price}>{price * count} ₽</div>
+        <button
+          onClick={() => dispatch(removeProduct({ id, type, size }))}
+          className={styles.delete}
+        >
+          x
+        </button>
       </div>
     </div>
   );
